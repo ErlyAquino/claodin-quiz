@@ -1,0 +1,30 @@
+# dependências
+node_modules/
+**/node_modules/
+
+# build
+dist/
+build/
+client/dist/
+server/dist/
+
+# ambiente / segredos (a chave da Claude API mora aqui — NUNCA commitar)
+.env
+.env.*
+!.env.example
+
+# banco de dados local
+*.sqlite
+*.sqlite3
+*.db
+data/
+
+# logs / temporários
+*.log
+.DS_Store
+Thumbs.db
+.vite/
+
+# Claude Code — config local da máquina (caminhos absolutos / preferências locais)
+.claude/settings.local.json
+.claude/launch.json

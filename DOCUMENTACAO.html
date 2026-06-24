@@ -1,0 +1,485 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ClaOdin-Quiz — Documentação</title>
+<style>
+  :root{
+    --violet:#6c5ce7; --violet-d:#4b3bbf; --ink:#1f2330; --muted:#5b6172; --faint:#8b90a0;
+    --bg:#f6f7fb; --card:#ffffff; --border:#e6e8ef; --code:#f0f1f6;
+    --green:#16a34a; --amber:#b8860b; --red:#dc2626; --cyan:#0e7490;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.6}
+  a{color:var(--violet-d);text-decoration:none}
+  a:hover{text-decoration:underline}
+  code{background:var(--code);padding:.12em .4em;border-radius:5px;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:.88em}
+  pre{background:#1f2330;color:#e7e9f0;padding:14px 16px;border-radius:10px;overflow:auto;font-family:ui-monospace,Consolas,monospace;font-size:.85rem;line-height:1.5}
+  pre code{background:none;padding:0;color:inherit}
+  h1,h2,h3{line-height:1.25;font-weight:800}
+  h2{font-size:1.5rem;margin:0 0 .4em;padding-top:.2em;border-bottom:2px solid var(--border);padding-bottom:.3em}
+  h3{font-size:1.12rem;margin:1.4em 0 .3em;color:var(--violet-d)}
+  table{border-collapse:collapse;width:100%;margin:.6em 0;font-size:.92rem}
+  th,td{border:1px solid var(--border);padding:8px 10px;text-align:left;vertical-align:top}
+  th{background:#eef0f7;font-weight:700}
+  ul,ol{padding-left:1.3em} li{margin:.2em 0}
+  /* header */
+  header.top{background:linear-gradient(135deg,var(--violet),#8b5cf6);color:#fff;padding:34px 24px}
+  header.top .in{max-width:1080px;margin:0 auto}
+  header.top h1{margin:0;font-size:2rem;letter-spacing:-.5px}
+  header.top p{margin:.4em 0 0;opacity:.92}
+  .pills{margin-top:14px;display:flex;gap:8px;flex-wrap:wrap}
+  .pill{background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.35);padding:4px 11px;border-radius:999px;font-size:.8rem;font-weight:600}
+  /* layout */
+  .layout{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:230px 1fr;gap:30px;padding:26px 24px 80px}
+  nav.toc{position:sticky;top:14px;align-self:start;font-size:.9rem;max-height:calc(100vh - 28px);overflow:auto}
+  nav.toc strong{display:block;color:var(--faint);text-transform:uppercase;font-size:.72rem;letter-spacing:.5px;margin:0 0 8px}
+  nav.toc a{display:block;color:var(--muted);padding:5px 10px;border-radius:7px;border-left:2px solid transparent}
+  nav.toc a:hover{background:var(--card);color:var(--ink);text-decoration:none;border-left-color:var(--violet)}
+  main{min-width:0}
+  section{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:22px 24px;margin-bottom:22px}
+  /* callouts */
+  .box{border-radius:10px;padding:12px 15px;margin:14px 0;font-size:.93rem;border:1px solid}
+  .box.info{background:#eef4ff;border-color:#cfe0ff} .box.info b{color:#1d4ed8}
+  .box.warn{background:#fff7e6;border-color:#ffe2ad} .box.warn b{color:var(--amber)}
+  .box.ok{background:#ecfdf3;border-color:#bbf7d0} .box.ok b{color:var(--green)}
+  .box.danger{background:#fef2f2;border-color:#fecaca} .box.danger b{color:var(--red)}
+  .tag{display:inline-block;font-size:.72rem;font-weight:700;padding:2px 8px;border-radius:999px;vertical-align:middle}
+  .tag.done{background:#dcfce7;color:#15803d} .tag.partial{background:#fef9c3;color:#a16207} .tag.todo{background:#e5e7eb;color:#4b5563}
+  .file{font-family:ui-monospace,Consolas,monospace;font-size:.85rem;color:var(--cyan)}
+  footer{max-width:1080px;margin:0 auto;padding:0 24px 50px;color:var(--faint);font-size:.85rem}
+  @media(max-width:860px){.layout{grid-template-columns:1fr}nav.toc{position:static;max-height:none;border:1px solid var(--border);border-radius:12px;background:var(--card);padding:14px}}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="in">
+    <h1>🎮 ClaOdin-Quiz — Documentação do Projeto</h1>
+    <p>Framework de quizzes estilo Kahoot para sala de aula. Roda no navegador, em rede local, sem instalação para o aluno.</p>
+    <div class="pills">
+      <span class="pill">TypeScript</span>
+      <span class="pill">React + Vite</span>
+      <span class="pill">Node + Fastify + Socket.IO</span>
+      <span class="pill">SQLite</span>
+      <span class="pill">IA: Claude · ChatGPT · Gemini</span>
+      <span class="pill">Editor rico + LaTeX/MathJax</span>
+      <span class="pill">Importação GIFT (Moodle)</span>
+      <span class="pill">Até 10 alternativas</span>
+      <span class="pill">Docker · GitHub</span>
+      <span class="pill">Fases 1–5 + extras ✅</span>
+    </div>
+  </div>
+</header>
+
+<div class="layout">
+  <nav class="toc">
+    <strong>Conteúdo</strong>
+    <a href="#visao">1. Visão geral</a>
+    <a href="#onde">2. Onde está &amp; como rodar</a>
+    <a href="#stack">3. Tecnologias</a>
+    <a href="#estrutura">4. Estrutura do código</a>
+    <a href="#fases">5. Fases concluídas</a>
+    <a href="#func">6. Funcionalidades</a>
+    <a href="#banco">7. Banco de dados</a>
+    <a href="#protocolo">8. Tempo real</a>
+    <a href="#ia">9. IA &amp; chaves</a>
+    <a href="#operacao">10. Operação (rede)</a>
+    <a href="#usar">11. Como usar</a>
+    <a href="#problemas">12. Problemas comuns</a>
+    <a href="#pendente">13. O que falta</a>
+    <a href="#deploy">14. Publicar &amp; Docker</a>
+  </nav>
+
+  <main>
+
+  <section id="visao">
+    <h2>1. Visão geral</h2>
+    <p>O <b>ClaOdin-Quiz</b> é um aplicativo web de perguntas e respostas no estilo <i>Kahoot</i>, feito para usar em sala de aula. O professor cria as perguntas, projeta numa tela, e os alunos respondem pelos próprios aparelhos (celular/notebook) entrando por um <b>PIN</b> — <b>sem instalar nada</b>, apenas abrindo um endereço no navegador.</p>
+    <h3>Principais recursos</h3>
+    <ul>
+      <li><b>Modos de jogo</b>: solo, dupla e grupo (até 5 integrantes por equipe).</li>
+      <li><b>Apelido + nome real</b>: os colegas veem só o apelido/nome da equipe; o professor vê os <b>nomes reais</b> nas estatísticas para lançar a nota.</li>
+      <li><b>Pontuação por questão</b>: ⚡ rápido (mais rápido = mais pontos) ou 🐢 lento (acertou = pontos cheios).</li>
+      <li><b>Editor de quizzes</b> salvo no servidor: criar, editar, consultar e lançar a qualquer momento.</li>
+      <li><b>Editor de texto rico</b>: barra de formatação (negrito, itálico, listas, sub/sobrescrito…), modo de código <b>HTML</b> e inserção de <b>equações LaTeX</b> renderizadas por MathJax (servido localmente, sem internet). <span class="tag done">novo</span></li>
+      <li><b>Até 10 alternativas</b> por pergunta (padrão 4), cada uma com forma e cor próprias (triângulo, losango… estrela, lua, sol, raio). <span class="tag done">novo</span></li>
+      <li><b>Importar quizzes no formato GIFT</b> (Moodle): texto, alternativas e a correta — convivendo com equações LaTeX. <span class="tag done">novo</span></li>
+      <li><b>Imagens</b> nas perguntas (enviar arquivo, colar print ou URL).</li>
+      <li><b>Geração por IA</b>: cria perguntas sobre um tema usando Claude, ChatGPT ou Gemini (à escolha), com seletor de quantas alternativas por pergunta.</li>
+      <li><b>Ranking animado</b>, contadores ao vivo, controle total do professor e <b>reconexão automática</b> (se o celular dormir, o aluno volta no mesmo ponto). Na revelação, o professor vê quem está <b>online e quem caiu</b>, para esperar antes de avançar. <span class="tag done">novo</span></li>
+      <li><b>Logo da ETE Epitácio Pessoa</b> no login, na espera do aluno e nas telas do professor (revelação e resultado final).</li>
+    </ul>
+  </section>
+
+  <section id="onde">
+    <h2>2. Onde está salvo &amp; como rodar</h2>
+    <h3>Pasta do projeto</h3>
+    <pre><code>C:\Users\erly_\projetos\quiz-app</code></pre>
+    <h3>Comandos (rodar no terminal, dentro dessa pasta)</h3>
+    <pre><code>npm install        # 1ª vez: instala as dependências
+npm run build      # compila o app (checa tipos + gera client/dist)
+npm start          # liga o servidor (serve tudo na porta 3000)
+
+# para desenvolver com recarga automática:
+npm run dev</code></pre>
+    <div class="box warn">
+      <b>⚠️ Mantenha o servidor de pé durante a aula.</b> Deixe a janela do terminal com <code>npm start</code> <b>aberta</b>.
+      Enquanto ela estiver aberta, o servidor não cai. As salas ficam na memória — se o servidor reiniciar, os jogadores precisam reentrar.
+    </div>
+    <h3>Endereços de acesso</h3>
+    <ul>
+      <li><b>No PC do professor:</b> <code>http://localhost:3000</code></li>
+      <li><b>Celulares/alunos (mesma rede Wi-Fi):</b> <code>http://192.168.0.2:3000</code> <span class="tag partial">o IP pode mudar</span></li>
+    </ul>
+    <div class="box info"><b>ℹ️ O IP da rede pode mudar</b> (é distribuído pelo roteador). O servidor <b>imprime o IP atual</b> no terminal toda vez que liga. Veja a seção <a href="#operacao">Operação</a> para deixá-lo fixo.</div>
+  </section>
+
+  <section id="stack">
+    <h2>3. Tecnologias</h2>
+    <table>
+      <tr><th>Camada</th><th>Tecnologia</th><th>Para quê</th></tr>
+      <tr><td>Linguagem</td><td>TypeScript</td><td>Frente e back na mesma língua, com checagem de tipos</td></tr>
+      <tr><td>Servidor</td><td>Node.js + Fastify + Socket.IO</td><td>API, servir o site, e o <b>tempo real</b> do jogo (salas, broadcast)</td></tr>
+      <tr><td>Banco</td><td>SQLite (better-sqlite3)</td><td>Arquivo único, sem servidor de banco separado</td></tr>
+      <tr><td>Interface</td><td>React 19 + Vite + Tailwind v4 + Framer Motion</td><td>Telas, build rápido, estilo e animações</td></tr>
+      <tr><td>Matemática</td><td>MathJax (servido localmente em <code>/mathjax</code>)</td><td>Renderiza equações LaTeX no enunciado e nas alternativas, sem CDN/internet</td></tr>
+      <tr><td>Segurança</td><td>DOMPurify (cliente) + sanitize-html (servidor)</td><td>Limpa o HTML rico do usuário (anti-XSS) preservando o LaTeX</td></tr>
+      <tr><td>IA</td><td>SDKs Anthropic, OpenAI e Google GenAI</td><td>Geração de perguntas por tema</td></tr>
+    </table>
+    <p>É um <b>monorepo</b> com dois pacotes (<span class="file">client/</span> e <span class="file">server/</span>). O servidor <b>compila e serve</b> o site já pronto, então tudo roda numa porta só (3000).</p>
+  </section>
+
+  <section id="estrutura">
+    <h2>4. Estrutura do código</h2>
+    <h3>Servidor — <span class="file">server/src/</span></h3>
+    <table>
+      <tr><th>Arquivo</th><th>O que faz</th></tr>
+      <tr><td class="file">index.ts</td><td>Liga o Fastify: serve o site (<code>client/dist</code>), as rotas REST (quizzes, upload, geração por IA, estatísticas), o Socket.IO, detecta o IP da rede e tem rede de segurança contra erros (não derruba o servidor).</td></tr>
+      <tr><td class="file">game.ts</td><td>O "motor" do jogo: salas em memória, todos os eventos de tempo real, cálculo de pontos, ranking e a <b>reconexão</b>.</td></tr>
+      <tr><td class="file">db.ts</td><td>Banco SQLite: cria/consulta quizzes, sessões, respostas e gera as estatísticas com nome real.</td></tr>
+      <tr><td class="file">quiz.ts</td><td>Tipo da pergunta, o quiz de demonstração e a fórmula de pontuação (<code>computePoints</code>).</td></tr>
+      <tr><td class="file">ai.ts</td><td>Geração por IA com 3 provedores (Claude/ChatGPT/Gemini), todos devolvendo o mesmo formato de pergunta. O modelo de cada provedor é lido por requisição (corrige um bug de ordem de carregamento do <code>.env</code>).</td></tr>
+      <tr><td class="file">sanitize.ts</td><td><span class="tag done">novo</span> Sanitiza o HTML rico no servidor (remove <code>&lt;script&gt;</code>, <code>on*</code>, <code>javascript:</code>) preservando os blocos de LaTeX; limita o tamanho das equações (anti-DoS).</td></tr>
+      <tr><td class="file">gift.ts</td><td><span class="tag done">novo</span> Importador do formato <b>GIFT</b> (Moodle): protege a matemática antes de interpretar a estrutura, resolvendo o conflito do <code>=</code>; entende múltipla escolha, V/F, escapes e comentários.</td></tr>
+    </table>
+    <h3>Interface — <span class="file">client/src/</span></h3>
+    <table>
+      <tr><th>Arquivo / pasta</th><th>O que faz</th></tr>
+      <tr><td class="file">App.tsx</td><td>Roteador de telas + a lógica de reconexão + o aviso "reconectando".</td></tr>
+      <tr><td class="file">screens/</td><td>As telas: <code>Home</code>, <code>StudentJoin</code> (entrada do aluno), <code>StudentGame</code> (jogo do aluno), <code>Host</code> (professor/projetor, agora com lista de presença na revelação), <code>ProfessorPanel</code> (lista de quizzes), <code>QuizEditor</code> (editor rico + IA + imagens + importar GIFT).</td></tr>
+      <tr><td class="file">components/</td><td><code>Shapes</code> (10 formas das alternativas), <code>OptionTile</code> (alternativa), <code>RichEditor</code> <span class="tag done">novo</span> (editor de texto rico + LaTeX), <code>MathContent</code> <span class="tag done">novo</span> (render seguro de HTML + matemática), <code>Leaderboard</code> (ranking animado), <code>SchoolLogo</code> (logo da ETE), <code>ConnectionOverlay</code>.</td></tr>
+      <tr><td class="file">lib/</td><td><code>socket.ts</code> (conexão), <code>session.ts</code> (identidade para reconectar) e <code>richText.ts</code> <span class="tag done">novo</span> (sanitização do HTML preservando o LaTeX).</td></tr>
+      <tr><td class="file">styles/tokens.css</td><td><b>Fonte única da verdade</b> do visual (cores, fontes, espaços). Estilo "Neo-Arcade" (escuro/vibrante).</td></tr>
+    </table>
+    <div class="box info"><b>Documento técnico:</b> o arquivo <span class="file">CLAUDE.md</span> na raiz tem o resumo técnico canônico do projeto (mapa, protocolo, banco), usado para retomar o desenvolvimento. A pasta <span class="file">.claude/agents/</span> guarda agentes de apoio ao desenvolvimento (revisor de código, red team de segurança, engenheiros de editor rico / LaTeX / GIFT).</div>
+  </section>
+
+  <section id="fases">
+    <h2>5. Fases concluídas</h2>
+    <table>
+      <tr><th>Fase</th><th>O que foi entregue</th><th>Status</th></tr>
+      <tr><td><b>1</b></td><td>Esqueleto rodando no navegador + design system "Neo-Arcade" (cores/tokens) + logo da ETE Epitácio Pessoa.</td><td><span class="tag done">pronto</span></td></tr>
+      <tr><td><b>2</b></td><td>Jogo ao vivo: criar sala (PIN), aluno entra, pergunta sincronizada, pontuação, ranking animado e estatísticas com nome real.</td><td><span class="tag done">pronto</span></td></tr>
+      <tr><td><b>2.5</b></td><td>Controle do professor: tempo por questão, avanço manual, contadores (online / responderam), telas separadas (resposta certa → ranking).</td><td><span class="tag done">pronto</span></td></tr>
+      <tr><td><b>3</b></td><td>Modos solo / dupla / grupo (1 aparelho por equipe, grupo até 5). Equipe = participante; integrantes = nomes reais.</td><td><span class="tag done">pronto</span></td></tr>
+      <tr><td><b>4</b></td><td>Editor + CRUD de quizzes salvos no servidor; pontuação por questão (rápido/lento); lançar quiz salvo a qualquer momento.</td><td><span class="tag done">pronto</span></td></tr>
+      <tr><td><b>5</b></td><td>Imagens nas perguntas (enviar/colar/URL) + geração por IA multi-provedor (Claude/ChatGPT/Gemini) com seletor no editor.</td><td><span class="tag done">pronto</span></td></tr>
+      <tr><td><b>Extra</b></td><td>Reconexão automática (celular dorme/Wi-Fi cai → volta no mesmo ponto) e blindagem de segurança.</td><td><span class="tag done">pronto</span></td></tr>
+      <tr><td><b>Extra</b></td><td><b>Editor de texto rico</b>: formatação + código HTML + equações <b>LaTeX</b> (MathJax local), com sanitização anti-XSS; matemática inline flui junto ao texto.</td><td><span class="tag done">pronto</span></td></tr>
+      <tr><td><b>Extra</b></td><td><b>Alternativas de 2 a 10</b> por pergunta (padrão 4), cada uma com forma e cor próprias; seletor de nº de opções na geração por IA.</td><td><span class="tag done">pronto</span></td></tr>
+      <tr><td><b>Extra</b></td><td><b>Importação GIFT</b> (Moodle), resolvendo o conflito entre o LaTeX e o caractere <code>=</code> do GIFT.</td><td><span class="tag done">pronto</span></td></tr>
+      <tr><td><b>Extra</b></td><td><b>Logo da ETE</b> nas telas-chave + <b>lista de presença</b> (online/desconectado) na revelação, para o professor esperar reconexões antes de avançar.</td><td><span class="tag done">pronto</span></td></tr>
+      <tr><td><b>6</b></td><td><b>Exportar</b> quiz em GIFT, DOCX e PDF (LaTeX/MiKTeX) + notas em CSV + QR code de entrada + Docker.</td><td><span class="tag todo">a fazer</span></td></tr>
+    </table>
+    <div class="box info"><b>Observação:</b> a ideia inicial de pontuação por <b>Teoria de Resposta ao Item (TRI)</b> foi <b>abandonada</b> a seu pedido, em favor dos modos "rápido" e "lento".</div>
+  </section>
+
+  <section id="func">
+    <h2>6. Funcionalidades em detalhe</h2>
+
+    <h3>🎯 O loop do jogo</h3>
+    <p>O professor abre uma sala (recebe um <b>PIN</b> e mostra na tela). Os alunos entram com o PIN. O professor escolhe o <b>modo</b> e clica em iniciar. Para cada pergunta:</p>
+    <ol>
+      <li>A pergunta aparece em todos com um <b>relógio</b> regressivo; o professor vê quantos estão <b>online</b> e quantos já <b>responderam</b>.</li>
+      <li>Quando o tempo acaba, todos respondem, ou o professor clica <b>"Pular"</b>, aparece a <b>resposta correta</b> + um botão "Continuar".</li>
+      <li>Em seguida vem a tela do <b>ranking animado</b> (os nicks sobem/descem), com a <b>lista de presença</b> (online/desconectado) + botão "Próxima pergunta".</li>
+      <li>No fim: <b>pódio</b> + tabela de estatísticas com os <b>nomes reais</b> (precisão, acertos, tempo médio) para o professor lançar a nota.</li>
+    </ol>
+
+    <h3>👥 Modos solo / dupla / grupo</h3>
+    <p>Modelo "1 aparelho por equipe": no login, a equipe digita o <b>nome da equipe</b> + os <b>nomes reais</b> dos integrantes (solo = 1; dupla = 2; grupo = 2 a 5). Todos da equipe recebem a pontuação da equipe.</p>
+    <div class="box warn"><b>Importante:</b> escolha o modo <b>antes</b> de os alunos entrarem (o formulário de entrada se adapta ao modo).</div>
+
+    <h3>🏆 Pontuação por questão</h3>
+    <ul>
+      <li><b>⚡ Rápido</b> — acerto + rapidez: 1000 pontos (instantâneo) caindo até 500 (no limite do tempo).</li>
+      <li><b>🐢 Lento</b> — acertou vale a pontuação cheia (1000), sem importar o tempo.</li>
+    </ul>
+    <p>É escolhido <b>em cada questão</b> no editor.</p>
+
+    <h3>🔌 Reconexão (resolve "celular dormindo")</h3>
+    <p>Cada aluno tem uma identidade estável. Se a conexão cai (tela bloqueia, Wi-Fi oscila), ele <b>não é removido</b> da sala — aparece o aviso "reconectando" e, ao voltar, ele retorna <b>na mesma pergunta, com o mesmo nome, sem precisar logar de novo</b>. Vale também no lobby (antes de iniciar).</p>
+
+    <h3>🔒 Segurança</h3>
+    <ul>
+      <li><b>Senha de professor</b> <span class="tag done">novo</span>: toda a área do professor (quizzes, gabaritos, estatísticas, geração por IA, import e PDF) exige login. O token de sessão usa um segredo do servidor (não dá para forjar) e o login tem proteção contra força bruta. Configure a senha em <code>PROFESSOR_PASSWORD</code> no <code>.env</code>.</li>
+      <li>Só o dono da sala controla o jogo (alunos não conseguem iniciar/avançar).</li>
+      <li>As <b>estatísticas com nome real</b> são protegidas por um token — só o professor da sessão acessa.</li>
+      <li>Validação das entradas; um erro inesperado não derruba o servidor.</li>
+      <li><b>Anti-XSS no conteúdo rico</b>: como enunciados/alternativas aceitam HTML e são exibidos no aparelho de outros alunos, todo HTML é sanitizado no servidor (sanitize-html) e no navegador (DOMPurify) antes de aparecer. <span class="tag done">novo</span></li>
+      <li><b>Limite de equações</b> para evitar travar o navegador da turma, e a importação GIFT é resistente a arquivos malformados/gigantes. <span class="tag done">novo</span></li>
+    </ul>
+
+    <h3>🖼️ Imagens nas perguntas</h3>
+    <p>No editor, cada pergunta pode ter imagem por <b>enviar arquivo</b>, <b>colar (Ctrl+V de um print)</b> ou <b>URL</b>. O arquivo vai para o servidor (até 4 MB) e aparece na tela do aluno e no projetor.</p>
+
+    <h3>✨ Geração por IA</h3>
+    <p>No editor há o painel "Gerar com IA": você escolhe o <b>modelo</b> (Claude / ChatGPT / Gemini), o tema, a quantidade, o nível e <b>quantas alternativas</b> cada pergunta terá, e a IA cria as perguntas (você revisa antes de salvar). Veja a configuração na seção <a href="#ia">IA &amp; chaves</a>.</p>
+
+    <h3>📝 Editor de texto rico (formatação, HTML e LaTeX)</h3>
+    <p>O enunciado tem um editor com <b>barra de ferramentas</b> (negrito, itálico, sublinhado, tachado, sobrescrito/subscrito, títulos, listas, link). Há um botão <code>&lt;/&gt; HTML</code> para editar o <b>código HTML</b> direto, e botões <b>∑ Equação</b> / <b>∑ bloco</b> para inserir <b>LaTeX</b>. Uma <b>pré-visualização ao vivo</b> mostra o resultado renderizado. As alternativas também aceitam HTML e LaTeX.</p>
+    <div class="box info"><b>Matemática sem internet:</b> o LaTeX é renderizado pelo <b>MathJax servido localmente</b> (rota <code>/mathjax</code>) — funciona na rede da escola sem depender de CDN. Use <code>$ ... $</code> para equação na linha e <code>$$ ... $$</code> para equação em destaque.</p></div>
+    <div class="box ok"><b>Seguro por padrão:</b> todo HTML do usuário passa por sanitização (DOMPurify no navegador e sanitize-html no servidor) antes de ser exibido, removendo scripts maliciosos — mas preservando as equações.</div>
+
+    <h3>🔢 Alternativas: de 2 a 10 por pergunta</h3>
+    <p>Cada pergunta começa com 4 alternativas e o botão <b>+ Adicionar alternativa</b> permite chegar a <b>10</b> (e remover de volta até 2). Cada alternativa tem uma <b>forma e cor próprias</b> (triângulo, losango, círculo, quadrado, estrela, lua, sol, coração, hexágono, raio) para reconhecimento rápido e acessível.</p>
+
+    <h3>📥 Importar do GIFT (Moodle)</h3>
+    <p>No editor, o botão <b>📥 Importar GIFT</b> lê um arquivo <code>.gift</code> e carrega as perguntas (texto, alternativas e a correta) para você revisar antes de salvar. Suporta múltipla escolha, Verdadeiro/Falso, títulos, comentários e os escapes do formato.</p>
+    <div class="box info"><b>LaTeX × GIFT sem conflito:</b> o GIFT usa <code>=</code> para marcar a resposta correta — o mesmo sinal que aparece em equações como <code>$x = 2$</code>. O importador <b>isola os blocos de matemática antes</b> de interpretar a estrutura do GIFT e os restaura no fim, então o <code>=</code> (e também <code>{ }</code>) dentro das equações nunca é confundido com a sintaxe do GIFT.</div>
+
+    <h3>👀 Presença na revelação (esperar quem caiu)</h3>
+    <p>Quando a pergunta é respondida, a tela do professor mostra os <b>apelidos dos alunos online e dos desconectados</b> (estes marcados com ⟳ em destaque), além de um aviso. Assim o professor só passa para a próxima pergunta com a certeza de que quem caiu teve tempo de voltar.</p>
+
+    <h3>🏫 Logo da escola</h3>
+    <p>A logo da <b>ETE Epitácio Pessoa</b> aparece no login, na tela de espera do aluno e nas telas do professor (resposta revelada e resultado final). É uma versão vetorial nas cores do tema; para usar o arquivo oficial, basta salvá-lo em <span class="file">client/public/logo-escola.png</span> (instrução comentada em <span class="file">SchoolLogo.tsx</span>).</p>
+  </section>
+
+  <section id="banco">
+    <h2>7. Banco de dados</h2>
+    <p>Banco SQLite num arquivo: <span class="file">server/data/quiz.sqlite</span> (criado automaticamente; fora do git). As imagens enviadas ficam em <span class="file">server/data/uploads/</span>.</p>
+    <table>
+      <tr><th>Tabela</th><th>Guarda</th></tr>
+      <tr><td><code>quizzes</code> / <code>quiz_questions</code></td><td>Os quizzes salvos e suas perguntas (enunciado em HTML rico + LaTeX, imagem, de 2 a 10 alternativas, correta, tempo, modo de pontuação).</td></tr>
+      <tr><td><code>sessions</code></td><td>Cada partida (PIN, modo, status, qual quiz, token do professor).</td></tr>
+      <tr><td><code>participants</code> / <code>members</code></td><td>A equipe (apelido, pontos) e seus integrantes (nomes reais — só o professor vê).</td></tr>
+      <tr><td><code>answers</code></td><td>Cada resposta (questão, alternativa escolhida, acertou, tempo, pontos) — base das estatísticas.</td></tr>
+    </table>
+  </section>
+
+  <section id="protocolo">
+    <h2>8. Tempo real (Socket.IO)</h2>
+    <p>O jogo ao vivo usa WebSocket. Resumo dos eventos:</p>
+    <h3>Do cliente para o servidor</h3>
+    <ul>
+      <li><b>Professor:</b> <code>host:create</code>, <code>host:setMode</code>, <code>host:start</code>, <code>host:reveal</code>, <code>host:next</code>, <code>host:rejoin</code>.</li>
+      <li><b>Aluno:</b> <code>player:peek</code> (descobrir o modo), <code>player:join</code>, <code>player:answer</code>, <code>player:rejoin</code>.</li>
+    </ul>
+    <h3>Do servidor para o cliente</h3>
+    <ul>
+      <li><code>question:show</code>, <code>answer:progress</code>, <code>question:reveal</code>, <code>player:result</code>, <code>lobby:update</code>, <code>game:ended</code>, <code>presence</code>.</li>
+    </ul>
+  </section>
+
+  <section id="ia">
+    <h2>9. IA &amp; chaves de API</h2>
+    <p>A geração de perguntas usa três provedores possíveis. Cada um é <b>opcional</b> — o editor mostra só os que têm chave. O resto do app funciona sem nenhuma IA.</p>
+    <h3>Onde ficam as chaves</h3>
+    <p>Num arquivo <span class="file">.env</span> na raiz do projeto (<b>não vai para o git</b> — está no <code>.gitignore</code>). Há um modelo em <span class="file">.env.example</span>. Estrutura:</p>
+    <pre><code># Claude (Anthropic) — console.anthropic.com
+ANTHROPIC_API_KEY=...
+
+# ChatGPT (OpenAI) — platform.openai.com
+OPENAI_API_KEY=...
+
+# Gemini (Google) — aistudio.google.com/apikey  (normalmente começa com "AIza...")
+GEMINI_API_KEY=...
+
+# Opcional: trocar o modelo de cada provedor
+# ANTHROPIC_MODEL=claude-haiku-4-5   (mais barato)
+OPENAI_MODEL=gpt-5.4-mini            # configurado atualmente
+GEMINI_MODEL=gemini-2.5-flash        # configurado atualmente</code></pre>
+    <p><b>Após editar o <code>.env</code>, reinicie o servidor.</b> <span class="tag done">corrigido</span> O modelo de cada provedor agora é lido a cada requisição — antes, por um problema de ordem de carregamento do <code>.env</code>, a troca de modelo não tinha efeito.</p>
+
+    <h3>Estado atual das chaves (teste realizado)</h3>
+    <table>
+      <tr><th>Provedor</th><th>Modelo padrão</th><th>Estado</th></tr>
+      <tr><td>🟣 Claude</td><td><code>claude-opus-4-8</code></td><td><span class="tag done">funcionando</span> — gerou perguntas corretas no teste.</td></tr>
+      <tr><td>🟢 ChatGPT</td><td><code>gpt-5.4-mini</code></td><td><span class="tag done">funcionando</span> — gerou pergunta no teste com o modelo gpt-5.4-mini.</td></tr>
+      <tr><td>🔵 Gemini</td><td><code>gemini-2.5-flash</code></td><td><span class="tag done">funcionando</span> — com a chave nova e o modelo 2.5-flash, gerou perguntas corretas no teste.</td></tr>
+    </table>
+    <div class="box danger"><b>🔑 Segurança das chaves:</b> as chaves foram coladas no chat durante a configuração. Como histórico de chat pode ser registrado, <b>considere rotacioná-las</b> (gerar novas no painel de cada provedor) e nunca as exponha em arquivos versionados, prints ou e-mails.</div>
+  </section>
+
+  <section id="operacao">
+    <h2>10. Operação (rede)</h2>
+    <h3>Servidor sempre de pé</h3>
+    <p>Para a aula não cair, rode <code>npm start</code> numa janela de terminal e <b>deixe aberta</b>. O servidor mostra o IP atual ao ligar.</p>
+    <h3>Firewall</h3>
+    <p>Foi criada uma regra no Firewall do Windows liberando a <b>porta 3000</b> para entrada (sem isso, os celulares não conseguem conectar, mesmo na mesma rede).</p>
+    <h3>IP fixo (recomendado)</h3>
+    <p>O IP é distribuído por DHCP e pode mudar (já foi <code>192.168.0.2</code>). Para o link dos alunos não quebrar:</p>
+    <ul>
+      <li><b>Reserva de DHCP</b> no roteador (associe o PC a um IP fixo) — jeito mais limpo; ou</li>
+      <li><b>IP estático</b> direto no Windows (Configurações → Rede → Ethernet).</li>
+    </ul>
+    <h3>Mesma rede</h3>
+    <p>O celular do aluno precisa estar no <b>mesmo Wi-Fi/roteador</b> do PC. Alguns roteadores têm "isolamento de clientes" (AP isolation) que impede um aparelho de falar com outro — se não conectar, verifique essa opção no roteador.</p>
+  </section>
+
+  <section id="usar">
+    <h2>11. Como usar (passo a passo)</h2>
+    <h3>Professor</h3>
+    <ol>
+      <li>Abra <code>http://localhost:3000</code>, clique em <b>Sou professor</b> e digite a <b>senha do professor</b> (padrão <code>professor</code> — troque em <code>PROFESSOR_PASSWORD</code> no <code>.env</code>). Você fica logado nesse aparelho.</li>
+      <li>Em <b>📚 Meus quizzes</b>: crie um <b>Novo quiz</b> (ou edite um existente). No editor você pode digitar as perguntas, <b>enviar/colar imagens</b>, marcar a alternativa correta, definir tempo e pontuação, e usar <b>✨ Gerar com IA</b>.</li>
+      <li>Salve e clique em <b>▶ Iniciar jogo</b>.</li>
+      <li>Escolha o <b>modo</b> (Solo/Dupla/Grupo) e mostre o <b>PIN</b> aos alunos.</li>
+      <li>Quando todos entrarem, clique em <b>Iniciar quiz</b>. Conduza com "Revelar / Continuar / Próxima".</li>
+      <li>No fim, veja a tabela com os <b>nomes reais</b> e as notas.</li>
+    </ol>
+    <h3>Aluno</h3>
+    <ol>
+      <li><b>Escaneie o QR code</b> mostrado na tela do professor → o celular abre já na entrada, com o <b>PIN preenchido</b>. (Sem QR: abra <code>http://IP-DO-PROFESSOR:3000</code>, toque em <b>Sou aluno</b> e digite o PIN.)</li>
+      <li>Confirme/preencha o <b>apelido</b> (ou nome da equipe) + os <b>nomes reais</b>.</li>
+      <li>Responda às perguntas tocando na alternativa.</li>
+    </ol>
+  </section>
+
+  <section id="problemas">
+    <h2>12. Problemas comuns</h2>
+    <table>
+      <tr><th>Sintoma</th><th>Causa / solução</th></tr>
+      <tr><td>Celular não abre o site</td><td>Verifique se está no mesmo Wi-Fi; confirme o IP no terminal; firewall (porta 3000); "isolamento de clientes" no roteador.</td></tr>
+      <tr><td>"Iniciar quiz" não funciona</td><td>O botão só habilita com pelo menos 1 aluno na sala.</td></tr>
+      <tr><td>Todos precisaram relogar</td><td>O servidor reiniciou (salas ficam na memória). Mantenha <code>npm start</code> aberto.</td></tr>
+      <tr><td>IA não gera</td><td>Os três provedores (Claude, ChatGPT, Gemini) funcionam. Se um falhar, confira a chave/cota no painel do provedor (ver seção IA).</td></tr>
+      <tr><td>Importação GIFT não traz nada</td><td>Só importa <b>múltipla escolha</b> e Verdadeiro/Falso; perguntas dissertativas, de associação ou de resposta curta são puladas.</td></tr>
+      <tr><td>Mudei o código e não apareceu</td><td>Rode <code>npm run build</code> de novo e dê <b>Ctrl+Shift+R</b> no navegador.</td></tr>
+    </table>
+  </section>
+
+  <section id="pendente">
+    <h2>13. O que falta fazer</h2>
+    <ul>
+      <li><span class="tag todo">código</span> <b>Exportar GIFT</b> — gerar o arquivo <code>.gift</code> a partir de um quiz (fecha o ciclo com a importação).</li>
+      <li><span class="tag todo">código</span> <b>Exportar DOCX</b> (Word) com as equações como imagem.</li>
+      <li><span class="tag todo">código</span> <b>Exportar PDF</b> via LaTeX/MiKTeX (já instalado na máquina) — qualidade tipográfica nas equações.</li>
+      <li><span class="tag todo">código</span> <b>Exportar notas em CSV</b> (planilha pronta para o diário).</li>
+      <li><span class="tag done">feito</span> <b>QR code</b> no lobby — o aluno escaneia e cai direto na tela de PIN já preenchida (o endereço do QR é montado com o IP/porta reais do servidor, conferidos na hora).</li>
+      <li><span class="tag done">feito</span> <b>Docker</b> + arquivos para publicar no GitHub (Dockerfile, docker-compose, README) — passo a passo na seção <a href="#deploy">14</a>.</li>
+      <li><span class="tag todo">código</span> Reconexão do <b>professor</b> após recarregar a página inteira (hoje cobre quedas de conexão, não o reload total do host).</li>
+      <li><span class="tag todo">qualidade</span> Ajustes finos de contraste em alguns botões e suíte de testes automatizados.</li>
+      <li><span class="tag todo">git</span> <b>Primeiro commit</b> — o repositório foi iniciado, mas nada foi versionado ainda (incluindo todas as melhorias acima).</li>
+    </ul>
+  </section>
+
+  <section id="deploy">
+    <h2>14. Publicar no GitHub &amp; rodar com Docker</h2>
+    <p>Roteiro completo para deixar o projeto pronto para o <b>GitHub</b> e para qualquer pessoa instalar e rodar localmente em <b>Windows ou Linux</b> usando <b>Docker</b> — o mesmo passo a passo nos dois sistemas. Os arquivos necessários (<span class="file">Dockerfile</span>, <span class="file">docker-compose.yml</span>, <span class="file">.dockerignore</span>, <span class="file">README.md</span>) já estão na raiz do projeto.</p>
+
+    <h3>14.0 — Dependências (o que cada caminho precisa)</h3>
+    <table>
+      <tr><th>Caminho</th><th>Precisa ter instalado</th></tr>
+      <tr><td><b>Com Docker</b> <span class="tag done">recomendado</span></td><td>Só o <b>Docker</b> — ele já traz Node, LaTeX e tudo o mais dentro da imagem.<br><span class="file">Windows/Mac:</span> Docker Desktop · <span class="file">Linux:</span> Docker Engine + plugin Compose.</td></tr>
+      <tr><td><b>Sem Docker</b> (manual)</td><td><b>Node.js 20+</b> e <b>npm</b>; e — só para o PDF de estatísticas — uma distribuição <b>LaTeX</b> (MiKTeX no Windows / TeX Live no Linux). Para o módulo nativo <code>better-sqlite3</code>, o npm baixa um binário pronto; em plataformas raras pode pedir <code>python3</code>, <code>make</code> e um compilador C++.</td></tr>
+      <tr><td><b>Publicar no GitHub</b></td><td><b>Git</b> instalado e uma <b>conta no GitHub</b>.</td></tr>
+    </table>
+    <div class="box info"><b>ℹ️ Por que o LaTeX?</b> O relatório de estatísticas em PDF é gerado pelo <code>pdflatex</code>. No Docker ele já vem instalado e pré-configurado (a 1ª geração é rápida). Sem Docker, instale MiKTeX (Windows) ou TeX Live (Linux). Sem LaTeX, o app funciona normal — só o botão <b>📄 PDF</b> fica indisponível.</div>
+
+    <h3>14.1 — Antes de publicar (segurança)</h3>
+    <ol>
+      <li><b>Rotacione as chaves de IA.</b> As chaves do <code>.env</code> já foram expostas em conversa — gere chaves novas no painel de cada provedor (Anthropic / OpenAI / Google) e atualize o <code>.env</code>. <span class="tag partial">importante</span></li>
+      <li><b>Confirme que o <code>.env</code> NÃO vai para o git.</b> Ele já está no <span class="file">.gitignore</span>. Antes do commit, rode <code>git status</code> e verifique que <code>.env</code> <b>não</b> aparece na lista de arquivos.</li>
+      <li>O que vai para o repositório é o modelo <span class="file">.env.example</span> (sem segredos) — esse <b>sim</b> deve ser versionado.</li>
+    </ol>
+    <div class="box danger"><b>🔑 Nunca comite o <code>.env</code>.</b> Ele contém segredos (chaves de IA e a senha do professor). O que vai para o GitHub é o <code>.env.example</code> (vazio).</div>
+
+    <h3>14.2 — Subir o projeto no GitHub</h3>
+    <p>No terminal, dentro da pasta do projeto (<span class="file">C:\Users\erly_\projetos\quiz-app</span>):</p>
+    <pre><code># 1. Crie um repositório VAZIO no site do GitHub (sem README) e copie a URL.
+
+# 2. Confira o que será versionado — o .env NÃO pode aparecer:
+git status
+
+# 3. Primeiro commit:
+git add .
+git commit -m "ClaOdin-Quiz: versao inicial"
+
+# 4. Conecte ao repositório remoto e envie (troque pela SUA URL):
+git branch -M main
+git remote add origin https://github.com/SEU-USUARIO/claodin-quiz.git
+git push -u origin main</code></pre>
+    <div class="box ok"><b>✅ Pronto.</b> Qualquer pessoa agora consegue clonar e rodar com os passos da seção 14.3.</div>
+
+    <h3>14.3 — Rodar com Docker (Windows e Linux)</h3>
+    <p><b>1) Instale o Docker:</b></p>
+    <ul>
+      <li><b>Windows / Mac:</b> instale o <b>Docker Desktop</b> (docker.com), abra-o e espere ficar "running".</li>
+      <li><b>Linux (Ubuntu/Debian):</b> instale o Docker Engine + Compose:
+        <pre><code>sudo apt update
+sudo apt install -y docker.io docker-compose-plugin
+sudo usermod -aG docker $USER   # depois, saia e entre de novo na sessao</code></pre>
+      </li>
+    </ul>
+    <p><b>2) Baixe o projeto e suba:</b></p>
+    <pre><code>git clone https://github.com/SEU-USUARIO/claodin-quiz.git
+cd claodin-quiz
+
+# Crie o .env (necessario para o compose). Depois preencha as chaves se quiser IA:
+cp .env.example .env            # Windows (PowerShell): copy .env.example .env
+
+# Constroi a imagem e sobe em segundo plano:
+docker compose up -d --build</code></pre>
+    <div class="box warn"><b>⏳ A primeira vez demora</b> (baixa o Node e o LaTeX e compila o front — alguns minutos e várias centenas de MB). Da segunda vez em diante é quase instantâneo.</div>
+    <p><b>3) Acesse e opere:</b></p>
+    <ul>
+      <li>No próprio PC do professor: <code>http://localhost:3000</code></li>
+      <li>Nos celulares (mesma rede): <code>http://IP-DO-PC:3000</code> — descubra o IP com <code>ipconfig</code> (Windows) ou <code>ip addr</code> (Linux). <b>No Docker, ignore o IP que o log do servidor imprime</b> (é o IP interno do contêiner); use o IP do PC.</li>
+      <li>Ver o log: <code>docker compose logs -f</code> · Parar: <code>docker compose down</code> · Subir de novo: <code>docker compose up -d</code></li>
+    </ul>
+    <div class="box info"><b>💾 Os dados ficam salvos</b> em <span class="file">server/data/</span> no seu PC (banco, imagens enviadas e estatísticas das turmas), via volume do Docker — não se perdem ao parar/atualizar o contêiner.</div>
+    <div class="box danger"><b>🔑 TROQUE a senha do professor.</b> Toda a área do professor (quizzes, gabaritos, estatísticas, PDF com nomes reais) é protegida por uma <b>senha</b>. O padrão é <code>professor</code> — defina a sua em <code>PROFESSOR_PASSWORD</code> no <code>.env</code>, senão os alunos podem entrar e ver os gabaritos. Vale para qualquer modo (manual, Docker, rede).</div>
+    <div class="box info"><b>📱 QR code no Docker:</b> o QR de entrada usa o IP/porta do servidor. Dentro do contêiner o IP detectado não serve para a rede, então defina <code>PUBLIC_HOST</code> no <code>.env</code> com o IP do PC (ex.: <code>192.168.0.2</code>) para o QR apontar certo. (Na instalação manual, o IP é detectado automaticamente.)</div>
+
+    <h3>14.4 — Rodar sem Docker (instalação manual)</h3>
+    <ol>
+      <li>Instale o <b>Node.js 20+</b> (nodejs.org).</li>
+      <li>(Opcional, só p/ o PDF) Instale o <b>LaTeX</b>: <b>MiKTeX</b> no Windows (miktex.org) ou, no Linux:
+        <pre><code>sudo apt install texlive-latex-recommended texlive-latex-extra texlive-lang-portuguese</code></pre>
+      </li>
+      <li>Na pasta do projeto:
+        <pre><code>npm install
+npm run build
+npm start</code></pre>
+      </li>
+      <li>Abra <code>http://localhost:3000</code>. (Para desenvolver com recarga automática: <code>npm run dev</code>.)</li>
+    </ol>
+
+    <h3>14.5 — Acesso na rede da escola</h3>
+    <ul>
+      <li><b>Firewall:</b> libere a <b>porta 3000</b> para entrada (no Windows já existe a regra; em outro PC, crie de novo).</li>
+      <li><b>Mesma rede Wi-Fi</b> entre o PC e os celulares; cuidado com "isolamento de clientes" (AP isolation) no roteador.</li>
+      <li><b>IP fixo</b> (reserva de DHCP no roteador) evita o link dos alunos quebrar — ver a seção <a href="#operacao">Operação</a>.</li>
+    </ul>
+
+    <h3>14.6 — Atualizar e fazer backup</h3>
+    <ul>
+      <li><b>Atualizar</b> (após um <code>git pull</code> com novidades): <code>docker compose up -d --build</code> reconstrói e troca o contêiner <b>sem perder os dados</b>.</li>
+      <li><b>Backup:</b> copie a pasta <span class="file">server/data/</span> (contém o banco <code>quiz.sqlite</code>, os uploads e os arquivos de estatística das turmas).</li>
+    </ul>
+  </section>
+
+  </main>
+</div>
+
+<footer>
+  Documento gerado em 22/06/2026 · <b>atualizado em 23/06/2026</b> · ClaOdin-Quiz · Projeto em <code>C:\Users\erly_\projetos\quiz-app</code> ·
+  Resumo técnico canônico em <span class="file">CLAUDE.md</span>.
+</footer>
+
+</body>
+</html>

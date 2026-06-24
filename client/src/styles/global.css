@@ -1,0 +1,46 @@
+@import "tailwindcss";
+@import "./tokens.css";
+
+* { box-sizing: border-box; }
+
+html, body, #root { height: 100%; margin: 0; }
+
+body {
+  font-family: var(--font-body);
+  color: var(--c-text);
+  background:
+    radial-gradient(1200px 600px at 20% -10%, rgba(124, 92, 255, 0.18), transparent 60%),
+    radial-gradient(900px 500px at 100% 0%, rgba(34, 211, 238, 0.12), transparent 55%),
+    var(--c-bg-900);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* modo claro: fundo claro clássico com glows MUITO sutis da marca */
+:root[data-theme="light"] body {
+  background:
+    radial-gradient(1200px 600px at 20% -10%, rgba(107, 70, 232, 0.07), transparent 60%),
+    radial-gradient(900px 500px at 100% 0%, rgba(14, 143, 173, 0.05), transparent 55%),
+    var(--c-bg-900);
+}
+
+h1, h2, h3, .display { font-family: var(--font-display); }
+
+/* foco visível para acessibilidade (teclado) */
+:focus-visible { outline: 3px solid var(--c-violet); outline-offset: 3px; border-radius: var(--r-sm); }
+
+/* placeholder do editor rico (contentEditable vazio) */
+.rich-editable:empty::before {
+  content: attr(data-placeholder);
+  color: var(--c-text-faint);
+  pointer-events: none;
+}
+.rich-editable:focus::before { content: none; }
+
+/* conteúdo rico renderizado: equações não estouram a tela em telas estreitas */
+mjx-container[display="true"] { overflow-x: auto; overflow-y: hidden; max-width: 100%; }
+
+/* matemática INLINE flui junto ao texto (sem o atributo [display], o MathJax v4 deixaria o
+   container como 'inline' e o <svg> em bloco forçaria quebra de linha). Não afeta a
+   matemática em bloco, que mantém o atributo [display] e a regra própria do MathJax. */
+mjx-container:not([display]) { display: inline-block; }

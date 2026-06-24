@@ -1,0 +1,19 @@
+# ClaOdin-Quiz — sobe o servidor numa porta só (3000), com os dados persistidos no host.
+#
+#   docker compose up -d --build     # constrói e sobe em segundo plano
+#   docker compose logs -f           # acompanha o log
+#   docker compose down              # para (os dados em ./server/data continuam)
+#
+# Antes de subir, crie o .env (mesmo vazio):  cp .env.example .env
+services:
+  quiz:
+    build: .
+    image: claodin-quiz
+    container_name: claodin-quiz
+    ports:
+      - "3000:3000"            # http://localhost:3000 e, na rede, http://IP-DO-PC:3000
+    env_file:
+      - .env                   # chaves de IA (opcional). Crie a partir do .env.example.
+    volumes:
+      - ./server/data:/app/server/data   # banco, uploads e estatísticas ficam no host
+    restart: unless-stopped

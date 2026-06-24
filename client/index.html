@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <!-- Tema: aplica antes da página pintar para não piscar (escuro é o padrão) -->
+    <script>
+      try { if (localStorage.getItem("quiz-theme") === "light") document.documentElement.setAttribute("data-theme", "light"); } catch (e) {}
+    </script>
+    <title>ClaOdin-Quiz</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700;800&family=Inter:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- MathJax local (servido em /mathjax pelo próprio servidor, sem CDN) -->
+    <script>
+      window.MathJax = {
+        tex: {
+          inlineMath: [["\\(", "\\)"], ["$", "$"]],
+          displayMath: [["\\[", "\\]"], ["$$", "$$"]],
+        },
+        svg: { fontCache: "local", linebreaks: { inline: false } },
+        startup: { typeset: false },
+        loader: { paths: { mathjax: "/mathjax" } },
+      };
+    </script>
+    <script src="/mathjax/tex-svg.js" async></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

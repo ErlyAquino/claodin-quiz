@@ -1,0 +1,173 @@
+/* ============================================================
+   QUIZ FRAMEWORK — DESIGN TOKENS  (fonte única da verdade)
+   Estilo: "Neo-Arcade Edu" — arcade vibrante, limpo e legível.
+   Nada de cor/tamanho/espaço hardcoded fora daqui.
+   ============================================================ */
+:root {
+  /* -- PALETA BASE (canvas escuro) ----------------------------- */
+  --c-bg-900: #0e0b1f;   /* fundo mais profundo            */
+  --c-bg-800: #16122e;   /* fundo                          */
+  --c-surface: #1f1a3d;  /* cartões / superfícies          */
+  --c-surface-2: #2a2350;/* superfície elevada             */
+  --c-border: #3a3470;   /* bordas sutis                   */
+
+  /* -- ACENTOS VIBRANTES --------------------------------------- */
+  --c-violet: #7c5cff;   /* primária / marca (texto/acento)*/
+  --c-violet-strong: #6e4dff; /* violeta de PREENCHIMENTO (botão) — texto branco passa AA */
+  --c-cyan:   #22d3ee;
+  --c-lime:   #a3e635;
+  --c-coral:  #ff5d8f;
+  --c-gold:   #fbbf24;
+  --c-gold-ink: #fbbf24; /* "ouro" usado como TEXTO (no escuro = mesmo ouro vibrante) */
+
+  /* -- CORES DAS ALTERNATIVAS (até 10 — cor + forma p/ acessibilidade) */
+  --c-answer-1:  #ff5d8f;  /* triângulo */
+  --c-answer-2:  #22d3ee;  /* losango   */
+  --c-answer-3:  #fbbf24;  /* círculo   */
+  --c-answer-4:  #a3e635;  /* quadrado  */
+  --c-answer-5:  #a78bfa;  /* estrela   */
+  --c-answer-6:  #fb923c;  /* lua       */
+  --c-answer-7:  #e879f9;  /* sol       */
+  --c-answer-8:  #2dd4bf;  /* coração   */
+  --c-answer-9:  #f87171;  /* hexágono  */
+  --c-answer-10: #60a5fa;  /* raio      */
+
+  /* -- SEMÂNTICOS DE ESTADO ------------------------------------ */
+  --c-success: #34d399;
+  --c-error:   #fb7185;
+  --c-warning: #fbbf24;
+
+  /* -- TEXTO --------------------------------------------------- */
+  --c-text:        #f5f3ff;  /* texto principal (alto contraste) */
+  --c-text-muted:  #b8b2e0;  /* secundário                       */
+  --c-text-faint:  #8079b0;  /* terciário / legendas             */
+  --c-text-on-accent: #15102e; /* texto sobre acento CLARO (lima, ouro, alternativas) */
+  --c-text-on-strong: #ffffff; /* texto sobre o PREENCHIMENTO violeta (escuro nos 2 temas) */
+  /* texto sobre fundos de ESTADO (sucesso/erro). No ESCURO esses fundos são claros
+     (verde/coral claros) → texto escuro; é invertido no claro. Ver bloco light. */
+  --c-text-on-state:  #15102e;
+
+  /* -- TIPOGRAFIA ---------------------------------------------- */
+  --font-display: "Bricolage Grotesque", "Space Grotesk", system-ui, sans-serif;
+  --font-body:    "Inter", system-ui, -apple-system, sans-serif;
+
+  --fs-xs: 0.75rem;   --fs-sm: 0.875rem;  --fs-md: 1rem;
+  --fs-lg: 1.25rem;   --fs-xl: 1.75rem;   --fs-2xl: 2.5rem;
+  --fs-3xl: 3.5rem;   --fs-display: 5rem;  /* pergunta no projetor */
+  --fw-regular: 400;  --fw-medium: 500;   --fw-bold: 700; --fw-black: 800;
+  --lh-tight: 1.1;    --lh-normal: 1.5;
+
+  /* -- ESPAÇAMENTO (escala única → sem números mágicos) -------- */
+  --sp-1: 4px;   --sp-2: 8px;   --sp-3: 12px;  --sp-4: 16px;
+  --sp-5: 24px;  --sp-6: 32px;  --sp-7: 48px;  --sp-8: 64px;  --sp-9: 96px;
+
+  /* -- RAIO ---------------------------------------------------- */
+  --r-sm: 8px;  --r-md: 14px;  --r-lg: 22px;  --r-xl: 32px;  --r-pill: 999px;
+
+  /* -- SOMBRA / GLOW ------------------------------------------- */
+  --shadow-sm: 0 2px 8px rgba(0,0,0,.25);
+  --shadow-md: 0 8px 24px rgba(0,0,0,.35);
+  --shadow-lg: 0 18px 48px rgba(0,0,0,.45);
+  --glow-violet: 0 0 0 3px rgba(124,92,255,.35);
+
+  /* Véu de overlay (modal/desconexão) e glows — tokenizados p/ adaptarem ao tema.
+     Derivam da cor base via color-mix, sem hardcode espalhado nos componentes. */
+  --c-veil:        color-mix(in srgb, var(--c-bg-900) 82%, transparent);
+  --glow-cyan-ring: 0 0 0 4px color-mix(in srgb, var(--c-cyan) 16%, transparent);
+  --glow-dot:       0 0 10px var(--c-success);
+  /* tintas translúcidas p/ barras do Leaderboard (líder = ouro, demais = violeta) */
+  --c-tint-leader-strong: color-mix(in srgb, var(--c-gold) 22%, transparent);
+  --c-tint-leader-soft:   color-mix(in srgb, var(--c-gold) 4%, transparent);
+  --c-tint-rank-strong:   color-mix(in srgb, var(--c-violet) 20%, transparent);
+  --c-tint-rank-soft:     color-mix(in srgb, var(--c-violet) 2%, transparent);
+
+  /* -- CAMADAS (z-index único → impede sobreposição acidental) - */
+  --z-base: 0;      --z-content: 10;  --z-sticky: 100;
+  --z-overlay: 800; --z-modal: 900;   --z-toast: 1000; --z-confetti: 1100;
+
+  /* -- MOVIMENTO ----------------------------------------------- */
+  --dur-fast: 120ms; --dur-base: 220ms; --dur-slow: 420ms;
+  --ease-out: cubic-bezier(.2,.8,.2,1);
+  --ease-bounce: cubic-bezier(.34,1.56,.64,1);
+
+  /* -- LAYOUT -------------------------------------------------- */
+  --container-max: 1100px;
+  --touch-min: 44px;  /* alvo de toque mínimo */
+}
+
+/* ============================================================
+   MODO CLARO — sobrescreve SÓ tokens de COR (data-theme="light")
+   "Neo-Arcade Edu" claro clássico: canvas branco-acinzentado,
+   superfícies brancas, violeta primária mantida, acentos
+   reaquecidos/aprofundados p/ contraste sobre fundo claro.
+   Nada além de cor e sombra/glow muda aqui.
+   ============================================================ */
+:root[data-theme="light"] {
+  /* -- PALETA BASE (canvas claro) ------------------------------ */
+  --c-bg-900: #eef0f6;   /* fundo mais profundo (branco-acinzentado frio) */
+  --c-bg-800: #f4f5fa;   /* fundo                          */
+  --c-surface: #ffffff;  /* cartões / superfícies          */
+  --c-surface-2: #f7f8fc;/* superfície elevada (sutil)     */
+  --c-border: #d8dae8;   /* bordas cinza-claras            */
+
+  /* -- ACENTOS VIBRANTES (aprofundados p/ fundo claro) ---------
+     Cada acento aqui é usado como TEXTO sobre branco em algum lugar,
+     então todos passam ≥ 4.5:1 sobre --c-surface (#fff). */
+  --c-violet: #6b46e8;   /* primária / marca — 5.7:1 como texto s/ branco */
+  --c-violet-strong: #6b46e8; /* preenchimento: texto branco = 7.9:1 */
+  --c-cyan:   #0a7d96;   /* 4.68:1 como texto s/ branco */
+  --c-lime:   #67a015;   /* FUNDO de botão: texto escuro = 4.81:1 (era 4.39) */
+  --c-coral:  #c92a5e;   /* 5.82:1 como texto s/ branco */
+  --c-gold:   #e0a020;   /* FUNDO claro: texto escuro = 6.25:1 */
+  --c-gold-ink: #946a00; /* ouro como TEXTO s/ branco = 5.54:1 (rótulos "Pergunta N") */
+
+  /* -- CORES DAS ALTERNATIVAS (fundos coloridos + texto escuro)
+     Todas como FUNDO com --c-text-on-accent (#1f2330) ≥ 4.5:1.
+     As que falhavam (1, 5, 9) foram clareadas; as demais já passavam. */
+  --c-answer-1:  #f06591;  /* triângulo (coral)  — 4.77:1 */
+  --c-answer-2:  #18a8c6;  /* losango (ciano)    */
+  --c-answer-3:  #e8a01c;  /* círculo (ouro)     */
+  --c-answer-4:  #84c019;  /* quadrado (lima)    */
+  --c-answer-5:  #a18cf0;  /* estrela (violeta)  — 5.10:1 */
+  --c-answer-6:  #f0801f;  /* lua (laranja)      */
+  --c-answer-7:  #d65adf;  /* sol (magenta)      */
+  --c-answer-8:  #15bba5;  /* coração (teal)     */
+  --c-answer-9:  #f06b67;  /* hexágono (vermelho)— 4.82:1 */
+  --c-answer-10: #3d8cf0;  /* raio (azul)        */
+
+  /* -- SEMÂNTICOS DE ESTADO ------------------------------------
+     Como TEXTO sobre branco ≥ 4.5:1; como FUNDO de banner, recebem
+     texto branco (--c-text-on-strong) — ambos os usos passam AA. */
+  --c-success: #0a7d54;  /* texto s/ branco = 4.90:1 · branco s/ ele = 5.08:1 */
+  --c-error:   #d12d46;  /* texto s/ branco = 5.0:1  · branco s/ ele = 5.10:1 */
+  --c-warning: #946a00;  /* texto s/ branco = 5.54:1 (= gold-ink)            */
+
+  /* -- TEXTO --------------------------------------------------- */
+  --c-text:        #1f2330;  /* texto principal escuro (alto contraste) */
+  --c-text-muted:  #4a4f63;  /* secundário (≈8.4:1 s/ branco)  */
+  --c-text-faint:  #595f73;  /* terciário (4.6:1 s/ #fff; 4.5:1 s/ surface-2)  */
+  --c-text-on-accent: #1f2330; /* texto sobre acento CLARO (escuro)   */
+  --c-text-on-strong: #ffffff; /* texto sobre o preenchimento violeta (branco) */
+  --c-text-on-state:  #ffffff; /* fundos de estado aqui são ESCUROS → texto branco */
+
+  /* -- SOMBRA / GLOW (sombras de luz neutra; glow da marca) ----- */
+  --shadow-sm: 0 2px 8px rgba(31,35,48,.08);
+  --shadow-md: 0 8px 24px rgba(31,35,48,.12);
+  --shadow-lg: 0 18px 48px rgba(31,35,48,.18);
+  --glow-violet: 0 0 0 3px rgba(107,70,232,.30);
+
+  /* Véu/glow tokenizados — recalculados sobre o canvas CLARO (sem véu preto).
+     No claro o véu é um scrim ESCURO leve (escurece só o suficiente p/ o card
+     saltar), não o quase-preto do tema escuro. O glow do dot é mais suave. */
+  --c-veil:        color-mix(in srgb, var(--c-text) 38%, transparent);
+  --glow-cyan-ring: 0 0 0 4px color-mix(in srgb, var(--c-cyan) 14%, transparent);
+  --glow-dot:       0 0 6px color-mix(in srgb, var(--c-success) 55%, transparent);
+  --c-tint-leader-strong: color-mix(in srgb, var(--c-gold) 16%, transparent);
+  --c-tint-leader-soft:   color-mix(in srgb, var(--c-gold) 3%, transparent);
+  --c-tint-rank-strong:   color-mix(in srgb, var(--c-violet) 12%, transparent);
+  --c-tint-rank-soft:     color-mix(in srgb, var(--c-violet) 2%, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root { --dur-fast: 1ms; --dur-base: 1ms; --dur-slow: 1ms; }
+}

@@ -1,0 +1,26 @@
+# Não copiar para a imagem (reinstalado/recompilado lá dentro):
+node_modules
+**/node_modules
+client/dist
+server/dist
+dist
+build
+
+# Dados de runtime (banco, uploads, estatísticas) — vão num VOLUME, não na imagem:
+server/data
+data
+
+# Segredos — NUNCA entram na imagem (passados em runtime via env_file):
+.env
+.env.*
+!.env.example
+
+# Git, logs, temporários e meta do editor:
+.git
+.gitignore
+.dockerignore
+*.log
+.DS_Store
+Thumbs.db
+.vite
+.claude
