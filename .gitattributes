@@ -1,0 +1,17 @@
+# Finais de linha consistentes entre Windows e Linux:
+# guarda tudo como LF no repositório e evita o vai-e-volta CRLF/LF.
+* text=auto eol=lf
+
+# Scripts que QUEBRAM com CRLF no Linux — força LF sempre.
+*.sh   text eol=lf
+*.mjs  text eol=lf
+
+# Binários — nunca normalizar (evita corromper).
+*.png   binary
+*.jpg   binary
+*.jpeg  binary
+*.webp  binary
+*.ico   binary
+*.pdf   binary
+*.woff  binary
+*.woff2 binary
